@@ -1,0 +1,46 @@
+.input-key-pair{
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    
+    border: 1px solid black;
+    background-color: transparent;
+    padding: 5px 20px;
+    border-radius: 20px;
+
+    width: 100%;
+}
+
+.input-key-pair *:focus{
+    outline: none;
+}
+
+.input-key-pair input, .input-key-pair textarea{
+    font-family: "Poppins";
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+
+    transition: font-size 0.3s;
+}
+
+.input-key-pair textarea{
+    resize: none;
+    overflow: hidden;
+    height: 36px;
+}
+
+.input-key-pair input.key{
+    font-weight: 600;
+    height: 36px;
+}
+
+.input-key-pair input.key.small{
+    font-size: 1.2em;
+}
+
+.input-key-pair input.key.smaller{
+    font-size: 1em;
+}
