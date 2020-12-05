@@ -8,16 +8,16 @@ const server = new grpc.Server()
 
 server.addService(databasePackage.DatabaseService.service, {
     set: (call, callback) => {
-        console.log(call)
-        callback({resultType: 0, record: { version: 1, timestamp: 0, data: "abc" }})
-    },
-    get: (call, callback) => {
-        console.log(call)
+        console.log("set")
         callback(null, {resultType: 0, record: { version: 1, timestamp: 0, data: "abc" }})
     },
-    del: () => {},
-    delVersion: () => {},
-    testAndSet: () => {}
+    get: (call, callback) => {
+        console.log("get")
+        callback(null, {resultType: 0, record: { version: 1, timestamp: 0, data: "abc" }})
+    },
+    del: () => {console.log("del")},
+    delVersion: () => {console.log("delVersion")},
+    testAndSet: () => {console.log("get")}
 })
 
 server.bind("localhost:8080", grpc.ServerCredentials.createInsecure())

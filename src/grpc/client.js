@@ -30,7 +30,11 @@ function delVersion(recordKey, recordVersion, callback){
 }
 
 function createRecord(version, timestamp = new Date().getTime(), data){
-    return {version, timestamp, data: JSON.stringify(data)}
+    const record = new Record()
+    record.setVersion(version)
+    record.setTimestamp(timestamp)
+    record.setData("a")
+    return record
 }
 
 export { client, get, set, del, delVersion, createRecord }
