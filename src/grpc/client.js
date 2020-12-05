@@ -33,4 +33,4 @@ function createRecord(version, timestamp = new Date().getTime()/1000, data){
     return {version, timestamp, data}
 }
 
-export { client, get, set, createRecord }
+export { client, get, set, del, delversion, createRecord }

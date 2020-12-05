@@ -1,4 +1,5 @@
 import "../css/header.css"
+import { client, get, set, del, delversion, createRecord } from "../grpc/client"
 
 function Header(){
     return (
@@ -7,10 +8,10 @@ function Header(){
                 <img src="/sdkielfull.svg" alt="logo"></img>
             </div>
             <nav>
-                <a href="#" rel="noopener">Criar</a>
-                <a href="#" rel="noopener">Ler</a>
-                <a href="#" rel="noopener">Atualizar</a>
-                <a href="#" rel="noopener">Remover</a>
+                <a href="#" rel="noopener" onClick={() => {set(1, createRecord(1, undefined, {name:"test"}), (err, resp) => {console.log(resp)})}}>Criar</a>
+                <a href="#" rel="noopener" onClick={() => {get(1, (err, resp) => console.log(resp))}}>Ler</a>
+                <a href="#" rel="noopener" onClick={() => {del(1, (err, resp) => {console.log(resp)})}}>Atualizar</a>
+                <a href="#" rel="noopener" onClick={() => {delVersion(1, 1, (err, resp) => {console.log(resp)})}}>Remover</a>
             </nav>
         </div>
     )

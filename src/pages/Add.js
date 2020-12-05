@@ -35,7 +35,7 @@ function Add(){
                     }
                 </div>
                 <div className="advanced">
-                <h1 
+                <h1
                     className="advanced-title"
                     onClick={() => {setShowAdvanced(!showAdvanced)}}
                 >
