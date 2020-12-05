@@ -29,7 +29,7 @@ function delVersion(recordKey, recordVersion, callback){
     client.delVersion(version, {}, callback)
 }
 
-function createRecord(version, timestamp = new Date().getTime()/1000, data){
+function createRecord(version, timestamp = new Date().getTime(), data){
     return {version, timestamp, data}
 }
 
