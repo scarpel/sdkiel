@@ -40,8 +40,4 @@ static_resources:
     type: logical_dns
     http2_protocol_options: {}
     lb_policy: round_robin
-<<<<<<< HEAD
     hosts: [{ socket_address: { address: 127.0.0.1, port_value: 8080 }}]
-=======
-    hosts: [{ socket_address: { address: 127.0.0.1, port_value: 8080 }}]
->>>>>>> c22a43cc042895f61a4c56e89607d7b25d3230a2
