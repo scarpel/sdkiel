@@ -78,7 +78,7 @@ function Upd(){
             <div className="dashboard">
                 <h1 className="name">upd</h1>
                 <button onClick={getDocument} disabled={!recordKey}>get document</button>
-                <button onClick={updateDoc} disabled={!record}>update document</button>
+                <button onClick={updateDoc} disabled={!record} style={{animationDelay: "0.6s"}}>update document</button>
                 {
                     savingData && <Spinner />
                 }

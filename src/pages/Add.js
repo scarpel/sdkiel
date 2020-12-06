@@ -63,7 +63,7 @@ function Add(){
             <div className="dashboard">
                 <h1 className="name">add</h1>
                 <button onClick={handleNewField}>add field</button>
-                <button onClick={addToDatabase} disabled={!recordKey}>add to database</button>
+                <button onClick={addToDatabase} disabled={!recordKey} style={{animationDelay: "0.6s"}}>add to database</button>
                 {
                     savingData && <Spinner />
                 }
