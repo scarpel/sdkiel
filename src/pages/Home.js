@@ -11,12 +11,11 @@ function Home(){
                 <img src={Circles} alt="Circles"/>
             </div>
             <div className="home-text">
-                <h1>GERENCIE SEU<br/>BANCO DE DADOS NoSQL</h1>
+                <h1>MANAGE YOUR<br/>NoSQL DATABASE</h1>
                 <p>
-                    Gerencie um banco de dados NoSQL: Adicione, acesse, remova e atualize seus dados de forma de
-                    forma de rápida e prática. 
+                    Manage a NoSQL database: add, get, delete and update your data in a fast and easy way. 
                 </p>
-                <Link to="/add"><button>Gerir o Banco de Dados</button></Link>
+                <Link to="/add"><button>Manage Database</button></Link>
             </div>
         </div>
     )
