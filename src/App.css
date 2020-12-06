@@ -6,3 +6,10 @@
 
   background-color: rgb(231, 231, 231);
 }
+
+.header{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+}

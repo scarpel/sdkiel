@@ -2,13 +2,13 @@
 
 @font-face {
   font-family: 'SF New Republic';
-  src: local('SF New Republic'), url('./fonts/SF New Republic.ttf') format('ttf');
+  src: url('fonts/SF.ttf') format('truetype');
   font-weight: normal;
 }
 
 @font-face {
   font-family: 'SF New Republic';
-  src: local('SF New Republic Bold'), url('./fonts/SF New Republic Bold.ttf') format('ttf');
+  src: url('fonts/SFF.ttf') format('truetype');
   font-weight: bold;
 }
 

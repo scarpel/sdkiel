@@ -4,6 +4,7 @@ import InputKeyPair from "../components/InputKeyPair"
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { set, createRecord } from "../grpc/client"
 import Spinner from "../components/Spinner"
+import Header from "../components/Header"
 import "../css/Add.css"
 import "../css/Page.css"
 
@@ -43,6 +44,7 @@ function Add(){
 
     const addToDatabase = () => {
         if(recordKey){
+            console.log(version)
             const record = createRecord(version, timestamp, Buffer.from(JSON.stringify(getData())))
             setSavingData(true)
             set(recordKey, record, (err, result) => {
@@ -64,6 +66,7 @@ function Add(){
 
     return (
         <div className="add">
+            <Header withLogo={false} />                
             <div className="dashboard">
                 <h1 className="name">add</h1>
                 <button onClick={handleNewField}>add field</button>

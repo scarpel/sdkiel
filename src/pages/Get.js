@@ -2,6 +2,8 @@ import { useState } from "react"
 import InputField from "../components/InputField"
 import { get } from "../grpc/client"
 import Spinner from "../components/Spinner"
+import Record from "../components/Record"
+import Header from "../components/Header"
 import "../css/Get.css"
 import "../css/Page.css"
 
@@ -9,6 +11,7 @@ function Get(){
     const [recordKey, setRecordKey] = useState("")
     const [fetchingData, setFetchingData] = useState(true)
     const [previous, setPrevious] = useState({1: "abc", 2: "def"})
+    const [record, setRecord] = useState(undefined)
 
     const fetchDoc = () => {
         setFetchingData(true)
@@ -16,15 +19,14 @@ function Get(){
             setFetchingData(false)
             if(err) console.log(err)
             else{
-                console.log(result)
-                const recordResult = result.getRecordresult()
-
+                if(result.getResulttype() === 0) setRecord(result)
             }
         })
     }
 
     return(
         <div className="get">
+            <Header withLogo={false} /> 
             <div className="dashboard">
                 <h1 className="name">get</h1>
                 <button className="get-btn" disabled={!recordKey} onClick={fetchDoc}>get document</button>
@@ -43,6 +45,9 @@ function Get(){
                 </div>
                 <div className="key-pairs">
                     <div className="data-fields">
+                        {
+                            record && <Record record={record.getRecord()}/>
+                        }
                     </div>
                 </div>
             </div>

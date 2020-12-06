@@ -5,19 +5,35 @@ const grpcObj = grpc.loadPackageDefinition(packageDef)
 const databasePackage = grpcObj.sd.nosql.prototype
 
 const server = new grpc.Server()
+const db = {}
 
 server.addService(databasePackage.DatabaseService.service, {
     set: (call, callback) => {
         console.log("set")
-        console.log(call.getRecord())
-        callback(null, {resultType: 0, record: { version: 1, timestamp: 0, data: "abc" }})
+        // console.log(call.request)
+        // console.log(call.request.key.toNumber(), call.request.record.timestamp.toNumber(), call.request.record.data.toString())
+        const {key, record} = call.request
+        db[key] = record
+        callback(null, call.request)
     },
     get: (call, callback) => {
         console.log("get")
-        callback(null, {resultType: 0, record: { version: 1, timestamp: 0, data: "abc" }})
+        const record = db[call.request.key]
+        const resultType = record? 0 : 1
+        callback(null, {resultType, record})
     },
-    del: () => {console.log("del")},
-    delVersion: () => {console.log("delVersion")},
+    del: (call, callback) => {
+        console.log("del")
+        const record = db[call.request.key]
+        const resultType = record? 0 : 1
+        callback(null, {resultType, record})
+    },
+    delVersion: (call, callback) => {
+        console.log("delVersion")
+        const record = db[call.request.key]
+        const resultType = record? 0 : 1
+        callback(null, {resultType, record})
+    },
     testAndSet: () => {console.log("get")}
 })
 
