@@ -1,6 +1,7 @@
 import "../css/Home.css"
 import Header from "../components/Header"
 import Circles from "../svg/circles.svg"
+import { Link } from "react-router-dom"
 
 function Home(){
     return(
@@ -10,13 +11,12 @@ function Home(){
                 <img src={Circles} alt="Circles"/>
             </div>
             <div className="home-text">
-                <h1>CRIE E GERENCIE SEU<br/>BANCO DE DADOS NoSQL</h1>
+                <h1>GERENCIE SEU<br/>BANCO DE DADOS NoSQL</h1>
                 <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    Gerencie um banco de dados NoSQL: Adicione, acesse, remova e atualize seus dados de forma de
+                    forma de rápida e prática. 
                 </p>
-                <button>Criar banco de dados</button>
+                <Link to="/add"><button>Gerir o Banco de Dados</button></Link>
             </div>
         </div>
     )
