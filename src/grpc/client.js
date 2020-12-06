@@ -1,5 +1,5 @@
 import { DatabaseServiceClient } from "../protos/database_grpc_web_pb"
-import { Key, Version, Record, RecordInput } from "../protos/database_pb"
+import { Key, Version, Record, RecordInput, RecordUpdate } from "../protos/database_pb"
 
 const client = new DatabaseServiceClient("http://localhost:9090", null, null)
 
@@ -29,12 +29,24 @@ function delVersion(recordKey, recordVersion, callback){
     client.delVersion(version, {}, callback)
 }
 
-function createRecord(version=1, timestamp = new Date().getTime(), data){
+function testAndSet(recordKey, oldVersion, record, callback){
+    const update = new RecordUpdate()
+    update.setKey(recordKey)
+    update.setOldversion(oldVersion)
+    update.setRecord(record)
+
+    client.testAndSet(update, {}, callback)
+}
+
+function createRecord(version, timestamp = new Date().getTime(), data){
     const record = new Record()
-    record.setVersion(version)
     record.setTimestamp(timestamp.toString())
     record.setData(data)
     return record
 }
 
-export { client, get, set, del, delVersion, createRecord }
+function bytesToObject(bytes){
+    return Buffer.from(bytes).toString()
+}
+
+export { client, get, set, del, delVersion, testAndSet, createRecord, bytesToObject }

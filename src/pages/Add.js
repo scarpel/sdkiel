@@ -1,7 +1,6 @@
 import { useState } from "react"
 import InputField from "../components/InputField"
 import InputKeyPair from "../components/InputKeyPair"
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import { set, createRecord } from "../grpc/client"
 import Spinner from "../components/Spinner"
 import Header from "../components/Header"
@@ -11,10 +10,7 @@ import "../css/Page.css"
 function Add(){
     const [fields, setFields] = useState({})
     const [fieldsData, setFieldsData] = useState({})
-    const [showAdvanced, setShowAdvanced] = useState(false)
     const [recordKey, setRecordKey] = useState("")
-    const [version, setVersion] = useState(undefined)
-    const [timestamp, setTimestamp] = useState(undefined)
     const [savingData, setSavingData] = useState(false)
 
     const handleNewField = () => {
@@ -44,8 +40,7 @@ function Add(){
 
     const addToDatabase = () => {
         if(recordKey){
-            console.log(version)
-            const record = createRecord(version, timestamp, Buffer.from(JSON.stringify(getData())))
+            const record = createRecord(undefined, undefined, Buffer.from(JSON.stringify(getData())))
             setSavingData(true)
             set(recordKey, record, (err, result) => {
                 reset()
@@ -58,8 +53,6 @@ function Add(){
 
     const reset = () => {
         setRecordKey("")
-        setVersion("")
-        setTimestamp("")
         setFields({})
         setFieldsData({})
     }
@@ -86,20 +79,6 @@ function Add(){
                             Object.keys(fields).map(key => fields[key])
                         }
                     </div>
-                </div>
-                <div className="advanced">
-                <h1
-                    className="advanced-title"
-                    onClick={() => {setShowAdvanced(!showAdvanced)}}
-                >
-                    Advanced {showAdvanced? <IoIosArrowUp /> : <IoIosArrowDown />}
-                </h1>
-                    {
-                        showAdvanced && <div className="advanced-fields">
-                            <InputField name="version" placeholder="version" state={[version, setVersion]} />
-                            <InputField name="timestamp" placeholder="timestamp" state={[timestamp, setTimestamp]} />
-                        </div>
-                    }
                 </div>
             </div>
         </div>

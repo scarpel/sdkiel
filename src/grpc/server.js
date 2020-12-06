@@ -14,6 +14,7 @@ server.addService(databasePackage.DatabaseService.service, {
         // console.log(call.request.key.toNumber(), call.request.record.timestamp.toNumber(), call.request.record.data.toString())
         const {key, record} = call.request
         db[key] = record
+        console.log(record)
         callback(null, call.request)
     },
     get: (call, callback) => {
@@ -34,7 +35,12 @@ server.addService(databasePackage.DatabaseService.service, {
         const resultType = record? 0 : 1
         callback(null, {resultType, record})
     },
-    testAndSet: () => {console.log("get")}
+    testAndSet: (call,callback) => {
+        console.log("test")
+        const record = db[call.request.key]
+        const resultType = record? 0 : 1
+        callback(null, {resultType, record})
+    }
 })
 
 server.bind("localhost:8080", grpc.ServerCredentials.createInsecure())

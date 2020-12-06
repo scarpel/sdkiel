@@ -9,8 +9,8 @@ import "../css/Page.css"
 
 function Get(){
     const [recordKey, setRecordKey] = useState("")
-    const [fetchingData, setFetchingData] = useState(true)
-    const [previous, setPrevious] = useState({1: "abc", 2: "def"})
+    const [fetchingData, setFetchingData] = useState(false)
+    const [previous, setPrevious] = useState({})
     const [record, setRecord] = useState(undefined)
 
     const fetchDoc = () => {
@@ -20,6 +20,7 @@ function Get(){
             if(err) console.log(err)
             else{
                 if(result.getResulttype() === 0) setRecord(result)
+                else console.log("error")
             }
         })
     }
@@ -32,7 +33,7 @@ function Get(){
                 <button className="get-btn" disabled={!recordKey} onClick={fetchDoc}>get document</button>
                 <div className="previous-docs">
                     { Object.keys(previous).map(key => 
-                        <div>{key}: {previous[key]}</div>
+                        <div key={key}>{key}: {previous[key]}</div>
                     ) }
                 </div>
                 {

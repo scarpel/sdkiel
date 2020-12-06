@@ -5,7 +5,8 @@ import "../css/InputKeyPair.css"
 function InputKeyPair(props){
     const { values, handleDelete } = props
     const textRef = useRef(null)
-    const [key, setKey] = useState("")
+    const [key, setKey] = useState(values.key? values.key:"")
+    const [value, setValue] = useState(values.value? values.value:"")
 
     const handleChange = (event) => {
         const {name, value} = event.target
@@ -32,7 +33,9 @@ function InputKeyPair(props){
                 placeholder="value"
                 name="value"
                 onChange={(event) => {
-                    handleChange(event)
+                    const {value} = event.target;
+                    setValue(value);
+                    values.value = value
                     textRef.current.style.height = "36px";
                     textRef.current.style.height = textRef.current.scrollHeight + "px"
                 }}

@@ -39,8 +39,7 @@ function Record(props){
                 <tr>
                     <td>Data</td>
                     <td>
-                        { json && JSONViewer(json)
-                        }
+                        { json && JSONViewer(json) }
                     </td>
                 </tr>
             </tbody>

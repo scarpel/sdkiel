@@ -14,7 +14,7 @@ function Header(props){
                 <Link to="/add">add</Link>
                 <Link to="/get">get</Link>
                 <Link to="/del">delete</Link>
-                <Link to="/del">update</Link>
+                <Link to="/upd">update</Link>
             </nav>
         </div>
     )

@@ -2,10 +2,9 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background-color: beige;
 
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 25% 75%;
 }
 
 .add .key-pairs{
