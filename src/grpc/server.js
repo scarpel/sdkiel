@@ -9,6 +9,7 @@ const server = new grpc.Server()
 server.addService(databasePackage.DatabaseService.service, {
     set: (call, callback) => {
         console.log("set")
+        console.log(call.getRecord())
         callback(null, {resultType: 0, record: { version: 1, timestamp: 0, data: "abc" }})
     },
     get: (call, callback) => {

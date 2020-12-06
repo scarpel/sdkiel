@@ -2,21 +2,64 @@ import { useState } from "react"
 import InputField from "../components/InputField"
 import InputKeyPair from "../components/InputKeyPair"
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
+import { set, createRecord } from "../grpc/client"
+import Spinner from "../components/Spinner"
 import "../css/Add.css"
 import "../css/Page.css"
 
 function Add(){
-    const [fields, setFields] = useState([])
+    const [fields, setFields] = useState({})
     const [fieldsData, setFieldsData] = useState({})
     const [showAdvanced, setShowAdvanced] = useState(false)
+    const [recordKey, setRecordKey] = useState("")
+    const [version, setVersion] = useState(undefined)
+    const [timestamp, setTimestamp] = useState(undefined)
+    const [savingData, setSavingData] = useState(false)
 
     const handleNewField = () => {
         const key = new Date().getTime()
-        setFields([...fields, <InputKeyPair inputs={fieldsData} key={key} inputKey={key}/>])
+        const obj = {}
+        const Component = <InputKeyPair inputs={fieldsData} key={key} handleDelete={() => handleInputDeletion(key)} values={obj}/>
+        setFieldsData({...fieldsData, [key]: obj})
+        setFields({...fields, [key]: Component})
     }
 
-    const h = () => {
-        Object.keys(fieldsData).map(k => console.log(fieldsData[k]()))
+    const handleInputDeletion = (key) => {
+        const {[key]: _, ...others} = fields
+        setFields(others)
+    }
+
+    const getData = () => {
+        let data = {}
+        let keys = Object.keys(fields)
+
+        for(let i=0, length=keys.length; i<length; i++){
+            let obj = fieldsData[keys[i]]
+            if(obj.key) data[obj.key] = obj.value 
+        }
+
+        return data
+    }
+
+    const addToDatabase = () => {
+        if(recordKey){
+            const record = createRecord(version, timestamp, Buffer.from(JSON.stringify(getData())))
+            setSavingData(true)
+            set(recordKey, record, (err, result) => {
+                reset()
+                setSavingData(false)
+                if(err) console.log(err)
+                else console.log(result)
+            })
+        }
+    }
+
+    const reset = () => {
+        setRecordKey("")
+        setVersion("")
+        setTimestamp("")
+        setFields({})
+        setFieldsData({})
     }
 
     return (
@@ -24,15 +67,22 @@ function Add(){
             <div className="dashboard">
                 <h1 className="name">add</h1>
                 <button onClick={handleNewField}>add field</button>
-                <button onClick={h}>add to database</button>
+                <button onClick={addToDatabase} disabled={!recordKey}>add to database</button>
+                {
+                    savingData && <Spinner />
+                }
             </div>
             <div className="info">
-                <InputField name="key" placeholder="key" handleChange={() => {}} />
+                <div className="info-data">
+                    <InputField name="key" placeholder="key" state={[recordKey, setRecordKey]} />
+                </div>
                 <div className="key-pairs">
                     <h1 className="data-title">Data</h1>
-                    {
-                        fields.map(Component => Component)
-                    }
+                    <div className="data-fields">
+                        {
+                            Object.keys(fields).map(key => fields[key])
+                        }
+                    </div>
                 </div>
                 <div className="advanced">
                 <h1
@@ -41,10 +91,11 @@ function Add(){
                 >
                     Advanced {showAdvanced? <IoIosArrowUp /> : <IoIosArrowDown />}
                 </h1>
-                    { showAdvanced? 
-                        <div>Advanced</div>
-                        :
-                        ""
+                    {
+                        showAdvanced && <div className="advanced-fields">
+                            <InputField name="version" placeholder="version" state={[version, setVersion]} />
+                            <InputField name="timestamp" placeholder="timestamp" state={[timestamp, setTimestamp]} />
+                        </div>
                     }
                 </div>
             </div>

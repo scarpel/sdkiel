@@ -16,7 +16,7 @@
     top: 0px;
     right: 0px;
 
-    width: 700px;
+    width: 58vw;
     height: 100%;
     overflow: hidden;
 
@@ -25,13 +25,13 @@
 
 .home .circles img{
     position: absolute;
-    top: -75px;
+    top: -10vw;
     right: -40px;
     
     user-select: none;
     object-fit: fill;
-    width: 700px;
-    height: 700px;
+    width: 58vw;
+    height: 58vw;
 
     animation: show-img 1s ease-out;
 }

@@ -1,40 +1,43 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
+import { TiDelete } from "react-icons/ti"
 import "../css/InputKeyPair.css"
 
 function InputKeyPair(props){
-    const {inputs, inputKey} = props
+    const { values, handleDelete } = props
     const textRef = useRef(null)
     const [key, setKey] = useState("")
-    const [value, setValue] = useState("")
 
-    const get = () => {
-        console.log(key, value)
-        return [key, value]
+    const handleChange = (event) => {
+        const {name, value} = event.target
+        values[name] = value
     }
 
-    useEffect(() => {
-        inputs[inputKey] = get
-    }, [])
-
     return (
-        <div className="input-key-pair" onClick={() => {console.log(key, value)}}>
+        <div className="input-key-pair">
             <input 
-                className={`key ${key.length>=8?(key.length>=11?"smaller":"small"):""}`} 
+                className={`key ${key && key.length>=8?(key.length>=11?"smaller":"small"):""}`} 
                 type="text" 
                 placeholder="key"
                 value={key}
-                onChange={(event) => setKey(event.target.value)}
+                name="key"
+                onChange={(e) => {
+                    const {value} = e.target;
+                    setKey(value);
+                    values.key = value
+                }}
             />
             <textarea 
                 ref={textRef} 
-                value={value}
+                value={values.value}
                 placeholder="value"
+                name="value"
                 onChange={(event) => {
-                    setValue(event.target.value)
+                    handleChange(event)
                     textRef.current.style.height = "36px";
                     textRef.current.style.height = textRef.current.scrollHeight + "px"
                 }}
             />
+            <TiDelete className="delete-icon" onClick={handleDelete}/>
         </div>
     )
 }

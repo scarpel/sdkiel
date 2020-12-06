@@ -1,4 +1,6 @@
 .dashboard{
+    position: relative;
+
     background-color: burlywood;
     padding: 0 25px;
     padding-top: 15%;
@@ -26,11 +28,13 @@
     border: 1px solid black;
     background-color: transparent;
     padding: 5px 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     z-index :1;
 
     overflow: hidden;
     cursor: pointer;
+
+    transition: opacity 0.5s;
 }
 
 .dashboard button:hover{
@@ -51,7 +55,7 @@
 
     width: 0%;
     height: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
 
     background-color: black;
 
@@ -63,8 +67,25 @@
     width: 104%;
 }
 
+.dashboard button:disabled{
+    color: black;
+    opacity: 0.5;
+    cursor: default;
+}
+
+.dashboard button:disabled:hover::before{
+    width: 0;
+}
+
 .info{
-    padding: 20%;
+    padding: 10%;
     background-color: violet;
     box-sizing: border-box;
+}
+
+.spinner{
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
 }

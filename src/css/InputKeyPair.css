@@ -1,4 +1,5 @@
 .input-key-pair{
+    position: relative;
     display: grid;
     grid-template-columns: 25% 75%;
     gap: 10px;
@@ -30,6 +31,7 @@
     resize: none;
     overflow: hidden;
     height: 36px;
+    padding-right: 30px;
 }
 
 .input-key-pair input.key{
@@ -43,4 +45,19 @@
 
 .input-key-pair input.key.smaller{
     font-size: 1em;
+}
+
+.input-key-pair .delete-icon{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    font-size: 30px;
+
+    transition: opacity 0.5s;
+    cursor: pointer;
+}
+
+.input-key-pair .delete-icon:hover{
+    opacity: 0.7;
 }

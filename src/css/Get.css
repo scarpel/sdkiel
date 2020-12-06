@@ -1,0 +1,21 @@
+.get{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: beige;
+
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.get-btn{
+    margin-top: 40px;
+}
+
+.get .previous-docs{
+    display: flex;
+    flex-flow: column;
+    color: black;
+    background-color: chocolate;
+    width: 100%;
+}
